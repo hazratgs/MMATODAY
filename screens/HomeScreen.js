@@ -1,16 +1,21 @@
 import React from 'react'
-import { Button, StyleSheet, Text, View } from 'react-native'
+import { connect } from 'react-redux'
+import { Button, StyleSheet, Text, View, ScrollView } from 'react-native'
 import { TabNavigator } from 'react-navigation'
+import NewsCard from '../components/NewsCard'
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   }
 })
 
+@connect(state => ({
+  news: state.News.data
+}))
 class HomeScreen extends React.Component {
   static navigationOptions = {
     title: 'Новости',
@@ -25,14 +30,12 @@ class HomeScreen extends React.Component {
   }
 
   render() {
+    const news = this.props.news.map(item => <NewsCard key={item.id} { ...item }/>)
     return (
-      <View style={styles.container}>
-        <Text>Привет, Халум!</Text>
-        <Button 
-          title="Go to Details" 
-          onPress={() => this.props.navigation.navigate('Details', )}
-        />
-      </View>
+      <ScrollView>
+        {news}
+      </ScrollView>
+      
     )
   }
 }
@@ -63,16 +66,18 @@ export default TabNavigator({
   Новости: { screen: HomeScreen },
   Видео: { screen: SettingsScreen }
 }, {
+  animationEnabled: true,
   tabBarOptions: {
     tinColor: '#B71129',
     activeTintColor: '#fff',
     inactiveTintColor: '#fff',
+    scrollEnabled: true,
     indicatorStyle: {
       backgroundColor: '#fff'
     },
     style: {
       backgroundColor: '#B71129',
-      shadowOpacity: 1,
+      shadowOpacity: 0.2,
       shadowOffset: {
         height: 5,
       },
@@ -80,6 +85,7 @@ export default TabNavigator({
     },
     labelStyle: {
       fontWeight: 'bold',
-    }
+      fontSize: 15,
+    },
   },
 })
