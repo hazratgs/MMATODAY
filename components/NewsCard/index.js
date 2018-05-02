@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-
 const CardView = styled.View`
   background-color: #fff;
   border-bottom-width: 8;
@@ -76,7 +75,6 @@ const StyleContent = styled.View`
   flex-direction: ${props => props.type === 'big' ? 'column' : 'row'};
   padding-right: ${props => props.type === 'big' ? '0' : '20'}
 `
-
 
 export default class NewsCard extends React.Component {
   render () {
