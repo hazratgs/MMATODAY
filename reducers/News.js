@@ -1,7 +1,7 @@
 import { } from '../constants/News'
 
 const initialState = {
-  data: [ 
+  data: [
     {
       id: 32,
       style: 'big',

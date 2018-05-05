@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Button, StyleSheet, Text, View, ScrollView, ListView } from 'react-native'
+import { Button, StyleSheet, Text, View, FlatList, RefreshControl } from 'react-native'
 import { TabNavigator } from 'react-navigation'
-import NewsCard from '../components/NewsCard'
 import Slider from '../components/Slider'
+import NewsCard from '../components/NewsCard'
 
 const styles = StyleSheet.create({
   container: {
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 @connect(state => ({
   news: state.News.data
 }))
-class HomeScreen extends React.Component {
+class HomeScreen extends React.PureComponent {
   static navigationOptions = {
     title: 'Новости',
     headerRight: (
@@ -30,15 +30,37 @@ class HomeScreen extends React.Component {
     ),
   }
 
-  render() {
-    const news = this.props.news
-      .filter(item => !item.slider)
-      .map(item => <NewsCard key={item.id} { ...item }/>)
+  state = {
+    refreshing: false,
+    firstSliderComponent: { id: 0, component: 'slider'}
+  }
+
+  _onRefresh = () => {
+    this.setState({ refreshing: true })
+    setTimeout(() => {
+      this.setState({ refreshing: false })
+    }, 1000);
+  }
+
+  _renderItem = ({ item }) => item.component ? <Slider/> : <NewsCard { ...item }/>
+
+  _keyExtractor = item => `${item.id}`
+
+  render () {
+    const news = this.props.news.filter(item => !item.slider)
     return (
-      <ScrollView>
-        <Slider/>
-        {news}
-      </ScrollView>
+      <FlatList
+        data={[ this.state.firstSliderComponent, ...news ]}
+        keyExtractor={this._keyExtractor}
+        renderItem={this._renderItem}
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh}
+            colors={['#B71129']}
+          />
+        }
+      />
     )
   }
 }
@@ -48,7 +70,7 @@ class SettingsScreen extends React.Component {
     title: 'Видео',
     headerRight: (
       <Button
-        onPress={() => alert('This is a button!')}
+        onPress={() => this.props.navigation.navigate('Details')}
         title="Live"
         color="#fff"
         backgroundColor="rgba(52, 52, 52, 0.1)"
@@ -59,7 +81,12 @@ class SettingsScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Slider/>
+        <Button
+          onPress={() => this.props.navigation.navigate('Details')}
+          title="Live"
+          color="#fff"
+          backgroundColor="rgba(52, 52, 52, 0.1)"
+        />
       </View>
     );
   }

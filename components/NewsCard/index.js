@@ -1,4 +1,6 @@
 import React from 'react'
+import { withNavigation } from 'react-navigation'
+import Ripple from 'react-native-material-ripple'
 import styled from 'styled-components'
 
 const CardView = styled.View`
@@ -69,14 +71,17 @@ const Images = styled.Image`
   margin-top: ${props => props.type === 'big' ? '15' : '5'};
   border-radius: ${props => props.type === 'big' ? '0' : '1'};
 `
-const StyleContent = styled.View`
+const StyleContent = styled.TouchableOpacity`
   flex: 1;
   display: flex;
   flex-direction: ${props => props.type === 'big' ? 'column' : 'row'};
   padding-right: ${props => props.type === 'big' ? '0' : '15'}
 `
 
+@withNavigation
 export default class NewsCard extends React.Component {
+  openNews = () => this.props.navigation.navigate('News')
+
   render () {
     return (
       <CardView>
@@ -88,19 +93,25 @@ export default class NewsCard extends React.Component {
             <AuthorName>{this.props.author.name}</AuthorName>
           </Author>
         </InfoView>
-        <StyleContent type={this.props.style}>
-          <Content type={this.props.style}>
-            <Title>{this.props.title}</Title>
-            <Description>
-              {this.props.description}
-            </Description>
-          </Content>
-          <Images
-          type={this.props.style}
-            source={{uri: this.props.img}}
-            resizeMode='cover'
-          />
-        </StyleContent>
+        <Ripple
+          rippleColor='#666'
+          rippleDuration={600}
+          onPress={this.openNews}
+        >
+          <StyleContent type={this.props.style}>
+            <Content type={this.props.style}>
+              <Title>{this.props.title}</Title>
+              <Description>
+                {this.props.description}
+              </Description>
+            </Content>
+            <Images
+              type={this.props.style}
+              source={{uri: this.props.img}}
+              resizeMode='cover'
+            />
+          </StyleContent>
+        </Ripple>
       </CardView>
     )
   }
