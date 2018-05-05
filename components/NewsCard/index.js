@@ -10,8 +10,8 @@ const CardView = styled.View`
 `
 const InfoView = styled.View`
   margin-bottom: 8;
-  padding-left: 20;
-  padding-right: 20;
+  padding-left: 15;
+  padding-right: 15;
   flex: 1;
   flex-direction: row;
   align-items: center
@@ -50,8 +50,8 @@ const AuthorName = styled.Text`
 `
 const Content = styled.View`
   flex: 1;
-  padding-left: 20;
-  padding-right: ${props => props.type === 'big' ? 20 : 17};
+  padding-left: 15;
+  padding-right: ${props => props.type === 'big' ? 15 : 15};
 `
 const Title = styled.Text`
   font-size: 18;
@@ -66,14 +66,14 @@ const Description = styled.Text`
 const Images = styled.Image`
   width: ${props => props.type === 'big' ? '100%' : '60'};
   height: ${props => props.type === 'big' ? '280' : '60'};
-  margin-top: ${props => props.type === 'big' ? '20' : '5'};
+  margin-top: ${props => props.type === 'big' ? '15' : '5'};
   border-radius: ${props => props.type === 'big' ? '0' : '1'};
 `
 const StyleContent = styled.View`
   flex: 1;
   display: flex;
   flex-direction: ${props => props.type === 'big' ? 'column' : 'row'};
-  padding-right: ${props => props.type === 'big' ? '0' : '20'}
+  padding-right: ${props => props.type === 'big' ? '0' : '15'}
 `
 
 export default class NewsCard extends React.Component {

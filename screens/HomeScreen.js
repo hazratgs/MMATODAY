@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Button, StyleSheet, Text, View, ScrollView } from 'react-native'
+import { Button, StyleSheet, Text, View, ScrollView, ListView } from 'react-native'
 import { TabNavigator } from 'react-navigation'
 import NewsCard from '../components/NewsCard'
+import Slider from '../components/Slider'
 
 const styles = StyleSheet.create({
   container: {
@@ -23,19 +24,21 @@ class HomeScreen extends React.Component {
       <Button
         onPress={() => alert('This is a button!')}
         title="Live"
-        color="#fff"
-        backgroundColor="rgba(52, 52, 52, 0.1)"
+        color="#B71129"
+        backgroundColor="#B71129"
       />
     ),
   }
 
   render() {
-    const news = this.props.news.map(item => <NewsCard key={item.id} { ...item }/>)
+    const news = this.props.news
+      .filter(item => !item.slider)
+      .map(item => <NewsCard key={item.id} { ...item }/>)
     return (
       <ScrollView>
+        <Slider/>
         {news}
       </ScrollView>
-      
     )
   }
 }
@@ -56,7 +59,7 @@ class SettingsScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Settings!</Text>
+        <Slider/>
       </View>
     );
   }
@@ -77,11 +80,6 @@ export default TabNavigator({
     },
     style: {
       backgroundColor: '#B71129',
-      shadowOpacity: 0.2,
-      shadowOffset: {
-        height: 5,
-      },
-      shadowRadius: 10
     },
     labelStyle: {
       fontWeight: 'bold',

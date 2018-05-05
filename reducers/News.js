@@ -1,7 +1,41 @@
 import { } from '../constants/News'
 
 const initialState = {
-  data: [
+  data: [ 
+    {
+      id: 32,
+      style: 'big',
+      title: 'Дана Уайт опроверг информацию о возвращении Нейта Диаза',
+      description: 'Не так давно интернет вновь наполнили слухи о том, что знаменитый американский легковес Нейт Диаз, наконец, собирается вернуться в октагон.',
+      type: 'UFC',
+      img: 'http://karate.ru/media/images/content/2016/8/21/104_Nate_Diaz_vs_Conor_McGregor.0.jpg',
+      views: 321,
+      comments: 21,
+      date: '59 минут назад',
+      author: {
+        img: 'https://leonardo.osnova.io/94ff37dd-361a-1148-e620-4adae912308a/-/scale_crop/32x32/center/',
+        name: 'Никита Лихачёв'
+      },
+      like: -23,
+      slider: true
+    },
+    {
+      id: 33,
+      style: 'big',
+      title: 'Расул Мирзаев: Не стану отрицать - конфликт с Хабибом у нас произошел',
+      description: 'За последнее время произошло очень много событий, которые я не комментировал. На что-то хотелось бы пролить ясность, а на остальное даже тратить сил не хочется.',
+      type: 'UFC',
+      img: 'http://cdn.iz.ru/sites/default/files/styles/900x506/public/article-2017-07/A37K2123.jpg?itok=IHV6Ayy-',
+      views: 321,
+      comments: 21,
+      date: '59 минут назад',
+      author: {
+        img: 'https://leonardo.osnova.io/94ff37dd-361a-1148-e620-4adae912308a/-/scale_crop/32x32/center/',
+        name: 'Никита Лихачёв'
+      },
+      like: -23,
+      slider: true
+    },
     {
       id: 29,
       style: 'small',
