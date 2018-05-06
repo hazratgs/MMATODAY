@@ -80,7 +80,7 @@ const StyleContent = styled.TouchableOpacity`
 
 @withNavigation
 export default class NewsCard extends React.Component {
-  openNews = () => this.props.navigation.navigate('News')
+  openNews = () => this.props.navigation.navigate('News', { id: this.props.id })
 
   render () {
     return (

@@ -7,7 +7,7 @@ const Content = styled.View`
   position: relative;
 `
 const Image = styled.Image`
-  height: 450;
+  height: 450px;
 `
 const Wrapper = styled.View`
   flex: 1;
@@ -17,7 +17,7 @@ const Wrapper = styled.View`
   width: 100%;
   height: 100%;
   z-index: 15;
-  justifyContent: flex-end;
+  justify-content: flex-end;
   padding: 0 20px 50px;
 `
 const Overlay = styled.View`

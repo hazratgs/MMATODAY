@@ -18,7 +18,8 @@ export const RootStack = StackNavigator(
   },
   {
     initialRouteName: 'Home',
-    headerMode: 'float',
+    // headerMode: 'float',
+    // headerTransitionPreset: 'uikit',
     navigationOptions: {
       headerStyle: {
         backgroundColor: '#B71129',
